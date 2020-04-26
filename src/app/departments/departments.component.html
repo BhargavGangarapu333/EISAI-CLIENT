@@ -1,0 +1,70 @@
+  <div>
+    <div class="header-text">
+     Departments
+    </div>
+    <div *ngIf="successMessage?.length !== 0" class="text-center success">
+      {{ successMessage }}
+     </div>
+     <div *ngIf="errorMessage?.length !== 0"  class="text-center required">
+      {{ errorMessage }}
+     </div>
+    <form #form [formGroup]="departmentForm" (ngSubmit)="saveDepartment()">
+      <div class="form-group row">
+        <label for="deptName" class="col-sm-2 col-form-label text-right">Department Name <span
+            class="required">*</span></label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" [restrictChars]="'special'" formControlName="deptName" id="deptName" [(ngModel)]="department.deptName">
+          <div *ngIf="controls.deptName.errors" class="required">
+            <div *ngIf="controls.deptName.touched && controls.deptName.errors.required"> Department Name is required
+            </div>
+            <div *ngIf="controls.deptName.touched && controls.deptName.errors.maxlength">
+              maximum {{ controls.deptName.errors.maxlength.requiredLength }} characters allowed</div>
+          </div>
+        </div>
+
+      </div>
+      <div class="form-group row">
+        <label for="deptCode" class="col-sm-2 col-form-label  text-right">Department Code <span
+            class="required">*</span></label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" [restrictChars]="'special'" formControlName="deptCode" id="deptCode" [(ngModel)]="department.deptCode">
+          <div *ngIf="controls.deptCode.errors" class="required">
+            <div *ngIf="controls.deptCode.touched && controls.deptCode.errors.required"> Department Code is required
+            </div>
+            <div *ngIf="controls.deptCode.touched && controls.deptCode.errors.minlength"> minimum
+              {{ controls.deptCode.errors.minlength.requiredLength }} characters required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-2 text-center">
+        </div>
+        <div class="col-sm-10">
+          <button class="btn btn-primary" *ngIf="department?.deptId !== 0" [disabled]="departmentForm.invalid">Update</button>
+          <button class="btn btn-primary" *ngIf="department?.deptId === 0" [disabled]="departmentForm.invalid">Save</button>
+          <span class="ml-5"></span>
+          <input type="button" class="btn btn-light" value="Cancel" (click)="clearControls()">
+        </div>
+      </div>
+    </form>
+    <div class="container">
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Department Name</th>
+            <th scope="col">Department Code</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let department of departmentsList; let i = index;">
+            <th scope="row">{{ i+1 }}</th>
+            <td>{{ department.deptName }}</td>
+            <td>{{ department.deptCode }}</td>
+            <td><button class="btn btn-primary" (click)="editDepartment(department)"> Edit</button><button class="btn btn-primary ml-5" (click)="deleteDepartment(department)"> Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

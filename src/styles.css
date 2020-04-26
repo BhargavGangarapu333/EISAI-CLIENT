@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap';
+
+form {
+  padding: 10px !important;
+}
+
+.required {
+  color: #dc3545;
+}
+
+.success {
+  color: green;
+}
+
+.ml-5 {
+  margin-left: 5px !important;
+}
+
+.header-text {
+  background-color: #e9ecef;
+  padding: 5px !important;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+  .font-style {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
